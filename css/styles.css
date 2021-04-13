@@ -1,3 +1,7 @@
+html {
+    font-family: 'Open Sans', sans-serif;
+}
+
 body {
     display: flex;
     height: 100vh;
@@ -23,6 +27,7 @@ button {
 #display {
     grid-column: 1/5;
     grid-row: 1;
+    font-size: 2em;
 }
 
 #zero {
