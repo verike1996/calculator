@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    background-color: #000;
+    background-color: #264653;
     display: flex;
     height: 100vh;
     justify-content: center;
@@ -25,7 +25,7 @@ button {
 }
 
 .number {
-    background-color: #333333;
+    background-color: #191E24;
     color: #fff;
 }
 
@@ -34,7 +34,7 @@ button {
 }
 
 .operator-buttons {
-    background-color: #fe9e09;
+    background-color: #F4A261;
     color: #fff;
 }
 

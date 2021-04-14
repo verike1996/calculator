@@ -1,12 +1,12 @@
 function grabDisplayNumber() {
     firstNumber = parseFloat(displayText);
-    displayText = 0;
 }
 
 function add() {
     if (!isAdd) {
         grabDisplayNumber();
     }
+    displayText = 0;
     isAdd = 1;
     isSubtract = 0;
     isMultiply = 0;
@@ -17,6 +17,7 @@ function subtract() {
     if (!isSubtract) {
         grabDisplayNumber();
     }
+    displayText = 0;
     isAdd = 0;
     isSubtract = 1;
     isMultiply = 0;
@@ -27,6 +28,7 @@ function multiply() {
     if (!isMultiply) {
         grabDisplayNumber();
     }
+    displayText = 0;
     isAdd = 0;
     isSubtract = 0;
     isMultiply = 1;
@@ -37,6 +39,7 @@ function divide() {
     if (!isDivide) {
         grabDisplayNumber();
     }
+    displayText = 0;
     isAdd = 0;
     isSubtract = 0;
     isMultiply = 0;
