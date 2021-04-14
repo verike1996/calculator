@@ -6,40 +6,48 @@ function grabDisplayNumber() {
 
 function add() {
     grabDisplayNumber();
-    isAdd = true;
-    isSubtract = false;
-    isMultiply = false;
-    isDivide = false;
+    isAdd = 1;
+    isSubtract = 0;
+    isMultiply = 0;
+    isDivide = 0;
 }
 
 function subtract() {
     grabDisplayNumber();
-    isAdd = false;
-    isSubtract = true;
-    isMultiply = false;
-    isDivide = false;
+    isAdd = 0;
+    isSubtract = 1;
+    isMultiply = 0;
+    isDivide = 0;
 }
 
 function multiply() {
     grabDisplayNumber();
-    isAdd = false;
-    isSubtract = false;
-    isMultiply = true;
-    isDivide = false;
+    isAdd = 0;
+    isSubtract = 0;
+    isMultiply = 1;
+    isDivide = 0;
 }
 
 function divide() {
     grabDisplayNumber();
-    isAdd = false;
-    isSubtract = false;
-    isMultiply = false;
-    isDivide = true;
+    isAdd = 0;
+    isSubtract = 0;
+    isMultiply = 0;
+    isDivide = 1;
 }
 
 function equals() {
     let secondNumber = parseFloat(displayText);
-    displayText = firstNumber + secondNumber;
-    display.textContent = displayText;
+    if (isAdd) {
+        answerText = firstNumber + secondNumber;
+    } else if (isSubtract) {
+        answerText = firstNumber - secondNumber;
+    } else if (isMultiply) {
+        answerText = firstNumber * secondNumber;
+    } else if (isDivide) {
+        answerText = firstNumber / secondNumber;
+    }
+    display.textContent = answerText;
 }
 
 const display = document.getElementById('display');
@@ -49,10 +57,10 @@ const multiplyButton = document.getElementById('multiply');
 const divideButton = document.getElementById('divide');
 const equalsButton = document.getElementById('equals');
 
-let isAdd = false;
-let isSubtract = false;
-let isMultiply = false;
-let isDivide = false;
+let isAdd = 0;
+let isSubtract = 0;
+let isMultiply = 0;
+let isDivide = 0;
 
 const numButton = document.querySelectorAll('.calc-buttons .number');
 
@@ -73,7 +81,7 @@ numButton.forEach(item => {
 })
 
 addButton.addEventListener('click', event => add());
-subtractButton.addEventListener('click', subtract())
-multiplyButton.addEventListener('click', multiply())
-divideButton.addEventListener('click', divide())
+subtractButton.addEventListener('click', event => subtract());
+multiplyButton.addEventListener('click', event => multiply());
+divideButton.addEventListener('click', event => divide());
 equalsButton.addEventListener('click', event => equals());
