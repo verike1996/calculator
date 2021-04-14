@@ -1,11 +1,12 @@
 function grabDisplayNumber() {
     firstNumber = parseFloat(displayText);
     displayText = 0;
-    display.textContent = displayText;;
 }
 
 function add() {
-    grabDisplayNumber();
+    if (!isAdd) {
+        grabDisplayNumber();
+    }
     isAdd = 1;
     isSubtract = 0;
     isMultiply = 0;
@@ -13,7 +14,9 @@ function add() {
 }
 
 function subtract() {
-    grabDisplayNumber();
+    if (!isSubtract) {
+        grabDisplayNumber();
+    }
     isAdd = 0;
     isSubtract = 1;
     isMultiply = 0;
@@ -21,7 +24,9 @@ function subtract() {
 }
 
 function multiply() {
-    grabDisplayNumber();
+    if (!isMultiply) {
+        grabDisplayNumber();
+    }
     isAdd = 0;
     isSubtract = 0;
     isMultiply = 1;
@@ -29,14 +34,16 @@ function multiply() {
 }
 
 function divide() {
-    grabDisplayNumber();
+    if (!isDivide) {
+        grabDisplayNumber();
+    }
     isAdd = 0;
     isSubtract = 0;
     isMultiply = 0;
     isDivide = 1;
 }
 
-function equals() {
+function evaluate() {
     let secondNumber = parseFloat(displayText);
     if (isAdd) {
         answerText = firstNumber + secondNumber;
@@ -47,6 +54,10 @@ function equals() {
     } else if (isDivide) {
         answerText = firstNumber / secondNumber;
     }
+}
+
+function equals() {
+    evaluate()
     display.textContent = answerText;
 }
 
@@ -66,6 +77,7 @@ const numButton = document.querySelectorAll('.calc-buttons .number');
 
 let displayText = 0;
 let firstNumber = 0;
+let answerText = null;
 
 numButton.forEach(item => {
     item.addEventListener('click', event => {
