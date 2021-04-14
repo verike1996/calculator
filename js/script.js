@@ -76,6 +76,27 @@ function changePosNeg() {
     }
 }
 
+function clearOperations() {
+    answerText = 0;
+    displayText = 0;
+    isAdd = 0;
+    isSubtract = 0;
+    isMultiply = 0;
+    isDivide = 0;
+    isCalculating = 0;
+    display.textContent = displayText;
+}
+
+function getPercentage() {
+    if (isCalculating) {
+        answerText = answerText * .01;
+        display.textContent = answerText;
+    } else {
+        displayText = displayText * .01;
+        display.textContent = displayText;
+    }
+}
+
 function evaluate() {
     let secondNumber = parseFloat(displayText);
     if (isAdd) {
@@ -92,6 +113,7 @@ function evaluate() {
 function equals() {
     evaluate()
     display.textContent = answerText;
+    // add a conditional if no first number has been selected
 }
 
 const display = document.getElementById('display');
@@ -101,7 +123,9 @@ const multiplyButton = document.getElementById('multiply');
 const divideButton = document.getElementById('divide');
 const equalsButton = document.getElementById('equals');
 
-const clearButton = document.getElementById('pos-neg');
+const clearButton = document.getElementById('clear');
+const posNegButton = document.getElementById('pos-neg');
+const percentageButton = document.getElementById('percent');
 
 let isAdd = 0;
 let isSubtract = 0;
@@ -120,11 +144,9 @@ numButton.forEach(item => {
         if (displayText === undefined || displayText === 0) {
             displayText = item.textContent;
             inputText = item.textContent;
-            console.log(item.textContent);
         } else {
             displayText += item.textContent;
             inputText += item.textContent;
-            console.log(item.textContent);
         }
         display.textContent = displayText;
     })
@@ -136,4 +158,6 @@ multiplyButton.addEventListener('click', event => multiply());
 divideButton.addEventListener('click', event => divide());
 equalsButton.addEventListener('click', event => equals());
 
-clearButton.addEventListener('click', event => changePosNeg());
+clearButton.addEventListener('click', event => clearOperations());
+posNegButton.addEventListener('click', event => changePosNeg());
+percentageButton.addEventListener('click', event => getPercentage());
