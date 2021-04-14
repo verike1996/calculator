@@ -2,48 +2,68 @@ function grabDisplayNumber() {
     firstNumber = parseFloat(displayText);
 }
 
+function grabAnswerNumber() {
+    firstNumber = parseFloat(answerText);
+}
+
 function add() {
     if (!isAdd) {
         grabDisplayNumber();
+    } 
+    if (isCalculating) {
+        grabAnswerNumber();
     }
     displayText = 0;
     isAdd = 1;
     isSubtract = 0;
     isMultiply = 0;
     isDivide = 0;
+    isCalculating = 1;
 }
 
 function subtract() {
     if (!isSubtract) {
         grabDisplayNumber();
+    } 
+    if (isCalculating) {
+        grabAnswerNumber();
     }
     displayText = 0;
     isAdd = 0;
     isSubtract = 1;
     isMultiply = 0;
     isDivide = 0;
+    isCalculating = 1;
 }
 
 function multiply() {
     if (!isMultiply) {
         grabDisplayNumber();
+    } 
+    if (isCalculating) {
+        grabAnswerNumber();
     }
     displayText = 0;
     isAdd = 0;
     isSubtract = 0;
     isMultiply = 1;
     isDivide = 0;
+    isCalculating = 1;
 }
 
 function divide() {
     if (!isDivide) {
         grabDisplayNumber();
+    } 
+    if (isCalculating) {
+        grabAnswerNumber();
     }
     displayText = 0;
     isAdd = 0;
     isSubtract = 0;
     isMultiply = 0;
     isDivide = 1;
+    isCalculating = 1;
 }
 
 function evaluate() {
@@ -75,6 +95,7 @@ let isAdd = 0;
 let isSubtract = 0;
 let isMultiply = 0;
 let isDivide = 0;
+let isCalculating = 0;
 
 const numButton = document.querySelectorAll('.calc-buttons .number');
 
