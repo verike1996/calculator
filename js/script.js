@@ -12,7 +12,7 @@ const addButton = document.getElementById('add');
 const subtractButton = document.getElementById('subtract');
 const multiplyButton = document.getElementById('multiply');
 const divideButton = document.getElementById('divide');
-const equalsButton = document.getElementById('equals')
+const equalsButton = document.getElementById('equals');
 
 const numButton = document.querySelectorAll('.calc-buttons .number');
 
