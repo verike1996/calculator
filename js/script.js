@@ -66,6 +66,16 @@ function divide() {
     isCalculating = 1;
 }
 
+function changePosNeg() {
+    if (isCalculating) {
+        answerText = answerText * -1;
+        display.textContent = answerText;
+    } else {
+        displayText = displayText * -1;
+        display.textContent = displayText;
+    }
+}
+
 function evaluate() {
     let secondNumber = parseFloat(displayText);
     if (isAdd) {
@@ -91,6 +101,8 @@ const multiplyButton = document.getElementById('multiply');
 const divideButton = document.getElementById('divide');
 const equalsButton = document.getElementById('equals');
 
+const clearButton = document.getElementById('pos-neg');
+
 let isAdd = 0;
 let isSubtract = 0;
 let isMultiply = 0;
@@ -107,9 +119,11 @@ numButton.forEach(item => {
     item.addEventListener('click', event => {
         if (displayText === undefined || displayText === 0) {
             displayText = item.textContent;
+            inputText = item.textContent;
             console.log(item.textContent);
         } else {
             displayText += item.textContent;
+            inputText += item.textContent;
             console.log(item.textContent);
         }
         display.textContent = displayText;
@@ -121,3 +135,5 @@ subtractButton.addEventListener('click', event => subtract());
 multiplyButton.addEventListener('click', event => multiply());
 divideButton.addEventListener('click', event => divide());
 equalsButton.addEventListener('click', event => equals());
+
+clearButton.addEventListener('click', event => changePosNeg());
