@@ -14,8 +14,49 @@ function divide(a,b) {
     return a / b;
 }
 
-function operate() {
+function addOperator() {
+    operationPerformed = 'add';
+    firstNumber = getNumber();
+}
 
+function subtractOperator() {
+    operationPerformed = 'subtract';
+    firstNumber = getNumber();
+}
+function addOperator() {
+    operationPerformed = 'add';
+    firstNumber = getNumber();
+}
+function addOperator() {
+    operationPerformed = 'add';
+    firstNumber = getNumber();
+}
+
+function evaluate() {
+    switch (operationPerformed) {
+        case 'add':
+            return add(firstNumber, secondNumber);
+            break;
+        case 'subract':
+            return subtract(firstNumber, secondNumber);
+            break;
+        case 'multiply':
+            return multiply(firstNumber, secondNumber);
+            break;
+        case 'divide':
+            return divide(firstNumber, secondNumber);
+            break;
+    }
+}
+
+function operate() {
+    display.value = solution;
+}
+
+function getNumber() {
+    let disVal = display.textContent;
+    parseFloat(disVal);
+    return disVal;
 }
 
 const display = document.getElementById('display');
@@ -32,6 +73,9 @@ const percentageButton = document.getElementById('percent');
 const numButton = document.querySelectorAll('.calc-buttons .number');
 
 let displayText = 0;
+let operationPerformed = null;
+let firstNumber = null;
+let secondNumber = null;
 
 numButton.forEach(item => {
     item.addEventListener('click', event => {
