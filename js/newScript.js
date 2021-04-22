@@ -70,6 +70,8 @@ const clearButton = document.getElementById('clear');
 const posNegButton = document.getElementById('pos-neg');
 const percentageButton = document.getElementById('percent');
 
+const allButtons = document.querySelector('.calc-buttons');
+
 const numButton = document.querySelectorAll('.calc-buttons .number');
 
 let displayText = 0;
@@ -91,4 +93,14 @@ numButton.forEach(item => {
     })
 
     // ALL SUBJECT TO CHANGE
+})
+
+allButtons.forEach(item => {
+    item.addEventListener('click', event => {
+        console.log('hi');
+        let textResetVar = display.textContent;
+        if (textResetVar == '') {
+            display.textContent = 0;
+        }
+    })
 })

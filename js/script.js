@@ -1,119 +1,91 @@
-function grabDisplayNumber() {
-    firstNumber = parseFloat(displayText);
-}
-
-function grabAnswerNumber() {
-    firstNumber = parseFloat(answerText);
+function grabNumber() {
+    if (answerText !== null) {
+        firstNumber = answerText;
+        secondNumber = parseFloat(displayText);
+    }
+    if (firstNumber == null || firstNumber == NaN) {
+        firstNumber = parseFloat(displayText)
+    } else if (secondNumber == null) {
+        secondNumber = parseFloat(displayText);
+    }
+    displayText = 0;
 }
 
 function add() {
-    if (!isAdd) {
-        grabDisplayNumber();
-    } 
-    if (isCalculating) {
-        grabAnswerNumber();
-    }
-    displayText = 0;
-    isAdd = 1;
-    isSubtract = 0;
-    isMultiply = 0;
-    isDivide = 0;
-    isCalculating = 1;
+    operate();
+    lastOperatorClicked = 'add';
 }
 
 function subtract() {
-    if (!isSubtract) {
-        grabDisplayNumber();
-    } 
-    if (isCalculating) {
-        grabAnswerNumber();
-    }
-    displayText = 0;
-    isAdd = 0;
-    isSubtract = 1;
-    isMultiply = 0;
-    isDivide = 0;
-    isCalculating = 1;
+    operate();
+    lastOperatorClicked = 'subtract';
 }
 
 function multiply() {
-    if (!isMultiply) {
-        grabDisplayNumber();
-    } 
-    if (isCalculating) {
-        grabAnswerNumber();
-    }
-    displayText = 0;
-    isAdd = 0;
-    isSubtract = 0;
-    isMultiply = 1;
-    isDivide = 0;
-    isCalculating = 1;
+    operate();
+    lastOperatorClicked = 'multiply';
 }
 
 function divide() {
-    if (!isDivide) {
-        grabDisplayNumber();
-    } 
-    if (isCalculating) {
-        grabAnswerNumber();
-    }
-    displayText = 0;
-    isAdd = 0;
-    isSubtract = 0;
-    isMultiply = 0;
-    isDivide = 1;
-    isCalculating = 1;
+    operate();
+    lastOperatorClicked = 'divide';
 }
 
 function changePosNeg() {
-    if (isCalculating) {
-        answerText = answerText * -1;
-        display.textContent = answerText;
-    } else {
-        displayText = displayText * -1;
-        display.textContent = displayText;
-    }
+    displayText = display.textContent * -1;
+    display.textContent = displayText;
 }
 
 function clearOperations() {
     answerText = 0;
     displayText = 0;
-    isAdd = 0;
-    isSubtract = 0;
-    isMultiply = 0;
-    isDivide = 0;
-    isCalculating = 0;
+    lastOperatorClicked = null;
+    firstNumber = null;
+    secondNumber = null;
     display.textContent = displayText;
 }
 
 function getPercentage() {
-    if (isCalculating) {
-        answerText = answerText * .01;
-        display.textContent = answerText;
-    } else {
-        displayText = displayText * .01;
-        display.textContent = displayText;
-    }
+    display.textContent = displayText * .01;
+}
+
+function countDecimals(value) {
+    if(Math.floor(value) === value) return 0;
+    return value.toString().split('.')[1].length || 0;
 }
 
 function evaluate() {
-    let secondNumber = parseFloat(displayText);
-    if (isAdd) {
+    if (lastOperatorClicked == 'add') {
         answerText = firstNumber + secondNumber;
-    } else if (isSubtract) {
+    } else if (lastOperatorClicked == 'subtract') {
         answerText = firstNumber - secondNumber;
-    } else if (isMultiply) {
+    } else if (lastOperatorClicked == 'multiply') {
         answerText = firstNumber * secondNumber;
-    } else if (isDivide) {
+    } else if (lastOperatorClicked == 'divide') {
         answerText = firstNumber / secondNumber;
+    }
+    displayText = answerText;
+    answerText = 0;
+}
+
+function operate() {
+    grabNumber();
+    if (lastOperatorClicked !== null) {
+        evaluate();
+        if (firstNumber !== null && secondNumber !== null) {
+            if (displayText.toString().length > 13) {
+                displayText = Number(displayText).toExponential(2);
+                display.textContent = displayText;
+            } else {
+                display.textContent = displayText;
+            }
+        }
     }
 }
 
 function equals() {
-    evaluate()
-    display.textContent = answerText;
-    // add a conditional if no first number has been selected
+    operate();
+    isCalculating = 1;
 }
 
 const display = document.getElementById('display');
@@ -127,26 +99,24 @@ const clearButton = document.getElementById('clear');
 const posNegButton = document.getElementById('pos-neg');
 const percentageButton = document.getElementById('percent');
 
-let isAdd = 0;
-let isSubtract = 0;
-let isMultiply = 0;
-let isDivide = 0;
+let lastOperatorClicked = null;
 let isCalculating = 0;
 
 const numButton = document.querySelectorAll('.calc-buttons .number');
 
-let displayText = 0;
-let firstNumber = 0;
+let displayText = null;
+let firstNumber = null;
+let secondNumber = null;
 let answerText = null;
 
 numButton.forEach(item => {
     item.addEventListener('click', event => {
-        if (displayText === undefined || displayText === 0) {
+        if (displayText === 0 || displayText === null) {
             displayText = item.textContent;
-            inputText = item.textContent;
         } else {
-            displayText += item.textContent;
-            inputText += item.textContent;
+            if (displayText.length < 13) {
+                displayText += item.textContent;
+            }
         }
         display.textContent = displayText;
     })
